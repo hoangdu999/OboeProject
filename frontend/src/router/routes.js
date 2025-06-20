@@ -23,6 +23,15 @@ import TheSettings from '@/views/self/my-settings/TheSettings.vue';
 import TheUpgrade from '@/views/pay-fee/upgrade/TheUpgrade.vue';
 import ThePayment from '@/views/pay-fee/payment/ThePayment.vue';
 import SearchResults from '@/views/home/search-results/SearchResults.vue';
+import TheMessages from '@/views/self/my-messages/MyMessages.vue'
+import AdminLayout from '@/views/admin/AdminLayout.vue';
+import UserManagement from '@/components/layout/admin-content/users/UserManagement.vue';
+import ReportManagement from '@/components/layout/admin-content/reports/ReportManagement.vue';
+import FeedbackManagement from '@/components/layout/admin-content/feedback/FeedbackManagement.vue';
+import DashboardView from '@/components/layout/admin-content/dashboard/DashboardView.vue'
+import TheTerms from '@/views/footer-services/terms/TheTerms.vue';
+import ThePrivacy from '@/views/footer-services/privacy/ThePrivacy.vue';
+
 const routes = [
   {
     path: "/",
@@ -196,6 +205,132 @@ const routes = [
     name: 'SearchResults',
     component: SearchResults,
     props: route => ({ query: route.query.q })
+  },
+  {
+    path: '/messages',
+    name: 'messages',
+    component: TheMessages,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+  path: '/admin',
+  name: 'admin',
+  component: AdminLayout,
+  // meta: { requiresAuth: true, requiresAdmin: true },
+  children: [
+    {
+      path: '',
+      name: 'admin-dashboard',
+      component: DashboardView,
+      meta: { title: 'Tổng quan' }
+    },
+    {
+      path: 'users',
+      name: 'admin-users',
+      component: UserManagement,
+      meta: { title: 'Quản lý người dùng' }
+    },
+    {
+      path: 'reports',
+      name: 'admin-reports',
+      component: ReportManagement,
+      meta: { title: 'Quản lý báo cáo' }
+    },
+    {
+      path: 'feedback',
+      name: 'admin-feedback',
+      component: FeedbackManagement,
+      meta: { title: 'Quản lý đóng góp ý kiến' }
+    }
+  ]
+  },
+  {
+    path: '/footer-services',
+    name: 'footer-services',
+    component: () => import('@/views/footer-services/FooterServicesLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'terms',
+        component: TheTerms,
+        meta: {
+          title: 'Điều khoản dịch vụ - Oboe'
+        }
+      },
+      {
+        path: 'security',
+        name: 'privacy',
+        component: ThePrivacy,
+        meta: {
+          title: 'Chính sách quyền riêng tư - Oboe'
+        }
+      },
+      {
+        path: 'study-guide',
+        name: 'study-guide',
+        component: () => import('@/views/footer-services/study-guide/TheStudyGuide.vue'),
+        meta: {
+          title: 'Hướng dẫn tự học - Oboe'
+        }
+      },
+      {
+        path: 'payment-guide',
+        name: 'payment-guide',
+        component: () => import('@/views/footer-services/payment-guide/ThePaymentGuide.vue'),
+        meta: {
+          title: 'Hướng dẫn thanh toán - Oboe'
+        }
+      },
+      {
+        path: 'flashcard',
+        name: 'flashcard',
+        component: () => import('@/views/footer-services/why-flashcard/TheWhyFlashcard.vue'),
+        meta: {
+          title: 'Tại sao nên học với Flashcard - Oboe'
+        }
+      },
+      {
+        path: 'hiragana-katakana',
+        name: 'hiragana-katakana',
+        component: () => import('@/views/footer-services/writing-guide/TheWritingGuide.vue'),
+        meta: {
+          title: 'Phân biệt Hiragana và Katakana - Oboe'
+        }
+      },
+      {
+        path: 'benefits-japanese',
+        name: 'benefits-japanese',
+        component: () => import('@/views/footer-services/japanese-benefits/TheBenefits.vue'),
+        meta: {
+          title: 'Lợi ích của việc học tiếng Nhật - Oboe'
+        }
+      },
+      {
+        path: 'kanji-recognition',
+        name: 'kanji-recognition',
+        component: () => import('@/views/footer-services/kanji-guide/TheKanjiGuide.vue'),
+        meta: {
+          title: 'Cách Nhận Diện Chữ Hán | Oboe',
+          requiresAuth: false
+        }
+      },
+      {
+        path: 'news',
+        name: 'japan-news',
+        component: () => import('@/views/footer-services/japan-news/TheJapanNews.vue'),
+        meta: {
+          title: 'Tin Tức Thị Trường Nhật Bản | Oboe',
+          requiresAuth: false
+        }
+      },
+      {
+        path: 'contact',
+        name: 'contact',
+        component: () => import('@/views/footer-services/contact/TheContact.vue'),
+      },
+    ]
   },
 ]
 

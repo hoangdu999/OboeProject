@@ -1,4 +1,4 @@
-@import '@/assets/css/index.scss';
+@use '@/assets/css/index.scss' as *;
 .search-results-page {
   .container {
     max-width: 1200px;
@@ -382,6 +382,7 @@
       margin: -4px;
 
       .terms-header {
+        border-radius: 12px 12px 0 0;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 16px;
