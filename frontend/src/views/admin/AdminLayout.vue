@@ -3,7 +3,7 @@
     <!-- Sidebar -->
     <div class="admin-sidebar" :class="{ 'collapsed': isSidebarCollapsed }">
       <div class="sidebar-header">
-          <img src="/src/assets/img/logo/logo_tab_oboe.svg" alt="Logo" class="w-45px" />
+        <img :src="ImagePaths.logo.logoTab" alt="Logo" class="w-45px" />
         <h1>Admin Panel</h1>
       </div>
       
@@ -90,6 +90,7 @@
 </template>
 
 <script setup>
+import { ImagePaths } from '@/assets/img/imagePaths';
 import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -106,6 +107,8 @@ const toggleSidebar = () => {
 // Mock admin data - replace with real data from your auth system
 const adminAvatar = 'https://i.pravatar.cc/150?u=admin';
 const adminName = 'Admin';
+
+
 
 const currentPageTitle = computed(() => {
   switch (route.path) {
